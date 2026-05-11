@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EduMatch Web3 — Platform Mentor Berbasis Blockchain</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">
+      <span class="logo-icon">⬡</span>
+      <span class="logo-text">EduMatch<sup>W3</sup></span>
+    </div>
+    <div class="nav-links">
+      <a href="#" onclick="showPage('home')" class="nav-link active" id="nav-home">Beranda</a>
+      <a href="#" onclick="showPage('mentors')" class="nav-link" id="nav-mentors">Mentor</a>
+      <a href="#" onclick="showPage('dashboard')" class="nav-link" id="nav-dashboard">Dashboard</a>
+      <a href="#" onclick="showPage('certificates')" class="nav-link" id="nav-certificates">Sertifikat</a>
+    </div>
+    <button class="wallet-btn" id="walletBtn" onclick="connectWallet()">
+      <span class="wallet-icon">⬡</span>
+      <span id="walletText">Hubungkan Wallet</span>
+    </button>
+  </nav>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="toast" id="toast"></div>
+
+  <!-- =================== PAGE: HOME =================== -->
+  <div id="page-home" class="page active">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-bg">
+        <canvas id="heroCanvas"></canvas>
+        <div class="grid-overlay"></div>
+      </div>
+      <div class="hero-content">
+        <div class="hero-badge">🔗 Powered by Ethereum Blockchain</div>
+        <h1 class="hero-title">
+          Belajar.<br>Terpercaya.<br><span class="accent">Terdesentralisasi.</span>
+        </h1>
+        <p class="hero-sub">Platform pencocokan siswa–mentor pertama di Indonesia yang menggunakan teknologi blockchain untuk keamanan sertifikat, transparansi rating, dan pembayaran otomatis via smart contract.</p>
+        <div class="hero-actions">
+          <button class="btn-primary" onclick="connectWallet()">
+            <span>🦊</span> Mulai dengan MetaMask
+          </button>
+          <button class="btn-ghost" onclick="showPage('mentors')">
+            Jelajahi Mentor →
+          </button>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><span class="stat-num" data-target="1240">0</span><span class="stat-label">Mentor Aktif</span></div>
+          <div class="stat-divider"></div>
+          <div class="stat"><span class="stat-num" data-target="8430">0</span><span class="stat-label">Sesi Selesai</span></div>
+          <div class="stat-divider"></div>
+          <div class="stat"><span class="stat-num" data-target="320">0</span><span class="stat-label">ETH Terdistribusi</span></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="blockchain-card">
+          <div class="bc-header">
+            <span class="bc-dot green"></span><span class="bc-dot yellow"></span><span class="bc-dot red"></span>
+            <span class="bc-title">Smart Contract — Escrow</span>
+          </div>
+          <div class="bc-code">
+            <div class="code-line"><span class="kw">contract</span> <span class="fn">EduMatch</span> {</div>
+            <div class="code-line ml1"><span class="kw">mapping</span>(address => Session) sessions;</div>
+            <div class="code-line ml1"><span class="cm">// Dana dikunci sampai sesi selesai</span></div>
+            <div class="code-line ml1"><span class="kw">function</span> <span class="fn">bookSession</span>(...) {</div>
+            <div class="code-line ml2"><span class="fn">escrow</span>[id] = msg.value;</div>
+            <div class="code-line ml2"><span class="kw">emit</span> SessionBooked(id);</div>
+            <div class="code-line ml1">}</div>
+            <div class="code-line ml1"><span class="kw">function</span> <span class="fn">releasePayment</span>(...) {</div>
+            <div class="code-line ml2">mentor.<span class="fn">transfer</span>(amount);</div>
+            <div class="code-line ml1">}</div>
+            <div class="code-line">}</div>
+          </div>
+          <div class="bc-footer">
+            <span class="bc-tag">✓ Verified on Polygon</span>
+            <span class="bc-hash">0x4a2f...e91c</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features">
+      <div class="section-header">
+        <p class="section-label">// FITUR UTAMA</p>
+        <h2>Mengapa EduMatch Web3?</h2>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🔏</div>
+          <h3>Sertifikat On-Chain</h3>
+          <p>Sertifikat skill disimpan sebagai hash di blockchain. Tidak bisa dipalsukan, bisa diverifikasi siapa saja kapan saja.</p>
+          <div class="feature-tech">IPFS + Ethereum</div>
+        </div>
+        <div class="feature-card highlight">
+          <div class="feature-icon">⚡</div>
+          <h3>Smart Contract Escrow</h3>
+          <p>Dana dibayar langsung ke smart contract. Otomatis dikirim ke mentor setelah sesi selesai. Zero risiko penipuan.</p>
+          <div class="feature-tech">Solidity + Web3.js</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⭐</div>
+          <h3>Reputasi Transparan</h3>
+          <p>Rating mentor tercatat permanen di blockchain. Tidak bisa dihapus, tidak bisa dimanipulasi. Semua histori terbuka.</p>
+          <div class="feature-tech">Immutable Ledger</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🤖</div>
+          <h3>AI Matching</h3>
+          <p>Sistem mencocokkan otomatis siswa dengan mentor terbaik berdasarkan skill, budget, dan jadwal.</p>
+          <div class="feature-tech">ML Recommendation</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🦊</div>
+          <h3>Wallet Login</h3>
+          <p>Login menggunakan MetaMask. Tidak perlu password. User punya kontrol penuh atas identitas digital mereka.</p>
+          <div class="feature-tech">MetaMask + DID</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🏛️</div>
+          <h3>DAO Governance</h3>
+          <p>Komunitas menentukan arah platform. Token holder bisa vote untuk perubahan kebijakan dan fitur baru.</p>
+          <div class="feature-tech">EduMatch Token</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="workflow">
+      <div class="section-header">
+        <p class="section-label">// CARA KERJA</p>
+        <h2>Alur Sistem EduMatch</h2>
+      </div>
+      <div class="workflow-steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-content">
+            <h3>Hubungkan Wallet</h3>
+            <p>Login via MetaMask. Identitas Anda tersimpan di blockchain sebagai Decentralized Identity (DID).</p>
+          </div>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-content">
+            <h3>Upload Sertifikat</h3>
+            <p>File sertifikat disimpan ke IPFS. Hash-nya dicatat permanen di Ethereum blockchain.</p>
+          </div>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-content">
+            <h3>Booking Mentor</h3>
+            <p>Pilih mentor, bayar via ETH/MATIC. Dana otomatis masuk ke smart contract escrow.</p>
+          </div>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <div class="step-content">
+            <h3>Sesi & Release</h3>
+            <p>Setelah sesi selesai, dana otomatis terkirim ke mentor. Rating tercatat di blockchain.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="cta-box">
+        <h2>Siap Memulai Perjalanan Belajar?</h2>
+        <p>Bergabung dengan ribuan siswa yang belajar secara aman, transparan, dan terdesentralisasi.</p>
+        <button class="btn-primary large" onclick="connectWallet()">
+          🚀 Daftar Sekarang — Gratis
+        </button>
+      </div>
+    </section>
+  </div>
+
+  <!-- =================== PAGE: MENTORS =================== -->
+  <div id="page-mentors" class="page">
+    <div class="page-inner">
+      <div class="page-header">
+        <h1>Temukan Mentor</h1>
+        <p>Semua mentor terverifikasi on-chain. Rating tidak bisa dimanipulasi.</p>
+      </div>
+
+      <!-- Search & Filter -->
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="🔍  Cari skill, nama mentor..." oninput="filterMentors()" />
+        <select id="filterSkill" onchange="filterMentors()">
+          <option value="">Semua Skill</option>
+          <option value="Web Development">Web Dev</option>
+          <option value="UI/UX Design">UI/UX</option>
+          <option value="Data Science">Data Science</option>
+          <option value="Blockchain">Blockchain</option>
+          <option value="Mobile Dev">Mobile Dev</option>
+        </select>
+        <select id="filterPrice" onchange="filterMentors()">
+          <option value="">Semua Harga</option>
+          <option value="low">< 0.01 ETH</option>
+          <option value="high">> 0.01 ETH</option>
+        </select>
+      </div>
+
+      <div class="mentors-grid" id="mentorsGrid"></div>
+    </div>
+  </div>
+
+  <!-- BOOKING MODAL -->
+  <div class="modal-overlay" id="bookingModal" onclick="closeModal(event)">
+    <div class="modal" id="modalContent">
+      <button class="modal-close" onclick="closeBookingModal()">✕</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- =================== PAGE: DASHBOARD =================== -->
+  <div id="page-dashboard" class="page">
+    <div class="page-inner">
+      <div class="page-header">
+        <h1>Dashboard Saya</h1>
+        <p>Kelola sesi, transaksi, dan reputasi Anda di blockchain.</p>
+      </div>
+
+      <div id="dashNotConnected" class="connect-prompt" style="display:none">
+        <div class="prompt-icon">🔒</div>
+        <h3>Hubungkan Wallet Anda</h3>
+        <p>Anda perlu menghubungkan MetaMask untuk mengakses dashboard.</p>
+        <button class="btn-primary" onclick="connectWallet()">🦊 Hubungkan MetaMask</button>
+      </div>
+
+      <div id="dashConnected" style="display:none">
+        <!-- Wallet Info -->
+        <div class="wallet-info-card">
+          <div class="wallet-address-box">
+            <span class="wifi-label">Wallet Terhubung</span>
+            <span class="wifi-addr" id="dashAddress">—</span>
+          </div>
+          <div class="wallet-balances">
+            <div class="bal-item">
+              <span class="bal-label">Saldo ETH</span>
+              <span class="bal-val" id="dashEth">—</span>
+            </div>
+            <div class="bal-item">
+              <span class="bal-label">Saldo EDU Token</span>
+              <span class="bal-val" id="dashEdu">—</span>
+            </div>
+            <div class="bal-item">
+              <span class="bal-label">Reputasi Score</span>
+              <span class="bal-val green" id="dashRep">—</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="dash-stats">
+          <div class="dash-stat">
+            <div class="ds-icon">📚</div>
+            <div class="ds-num" id="dsTotalSesi">0</div>
+            <div class="ds-label">Total Sesi</div>
+          </div>
+          <div class="dash-stat">
+            <div class="ds-icon">✅</div>
+            <div class="ds-num" id="dsSelesai">0</div>
+            <div class="ds-label">Sesi Selesai</div>
+          </div>
+          <div class="dash-stat">
+            <div class="ds-icon">⏳</div>
+            <div class="ds-num" id="dsPending">0</div>
+            <div class="ds-label">Dalam Escrow</div>
+          </div>
+          <div class="dash-stat">
+            <div class="ds-icon">⭐</div>
+            <div class="ds-num" id="dsRating">0.0</div>
+            <div class="ds-label">Avg. Rating</div>
+          </div>
+        </div>
+
+        <!-- Transactions -->
+        <div class="section-card">
+          <h3>Riwayat Transaksi On-Chain</h3>
+          <div class="tx-list" id="txList"></div>
+        </div>
+
+        <!-- Active Sessions -->
+        <div class="section-card">
+          <h3>Sesi Aktif</h3>
+          <div id="activeSessions"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================== PAGE: CERTIFICATES =================== -->
+  <div id="page-certificates" class="page">
+    <div class="page-inner">
+      <div class="page-header">
+        <h1>Sertifikat & Skill On-Chain</h1>
+        <p>Verifikasi sertifikat siapa saja. Data tersimpan permanen di blockchain.</p>
+      </div>
+
+      <!-- Upload -->
+      <div class="cert-upload-card">
+        <h3>Upload Sertifikat Baru</h3>
+        <div class="upload-area" id="uploadArea" onclick="document.getElementById('certFile').click()" ondragover="dragOver(event)" ondrop="dropFile(event)">
+          <input type="file" id="certFile" accept=".pdf,.jpg,.png" onchange="handleFileUpload(event)" style="display:none">
+          <div class="upload-icon">📄</div>
+          <p>Klik atau drag & drop file sertifikat</p>
+          <small>PDF, JPG, PNG — Max 10MB</small>
+        </div>
+        <div id="uploadForm" style="display:none">
+          <input type="text" id="certName" placeholder="Nama Sertifikat (contoh: React Developer Certificate)" class="form-input" />
+          <input type="text" id="certIssuer" placeholder="Penerbit (contoh: Dicoding, Coursera)" class="form-input" />
+          <input type="text" id="certSkill" placeholder="Skill Terkait (contoh: Web Development)" class="form-input" />
+          <button class="btn-primary" onclick="uploadCertificate()">🔗 Simpan ke Blockchain</button>
+        </div>
+      </div>
+
+      <!-- Verify -->
+      <div class="cert-verify-card">
+        <h3>Verifikasi Hash Sertifikat</h3>
+        <div class="verify-input-row">
+          <input type="text" id="verifyHash" placeholder="Masukkan hash sertifikat (0x...)" class="form-input" />
+          <button class="btn-secondary" onclick="verifyCertificate()">🔍 Verifikasi</button>
+        </div>
+        <div id="verifyResult"></div>
+      </div>
+
+      <!-- My Certs -->
+      <div class="section-card">
+        <h3>Sertifikat Saya</h3>
+        <div class="certs-list" id="certsList"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
